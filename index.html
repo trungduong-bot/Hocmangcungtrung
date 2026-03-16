@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cisco Academy — CCNA · CCNP · CCIE</title>
+<title>Học Mạng Cùng Trung — CCNA · CCNP · CCIE</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -550,8 +550,41 @@ nav{
 .score-box{background:var(--bg2);}
 .cs-cmd{background:var(--bg3);color:var(--ccna);}
 .hero{background:var(--bg2);}
+
+/* ─── YOUTUBE CARDS ─── */
+.yt-section{margin-bottom:36px;}
+.yt-section-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.yt-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.yt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.yt-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;
+  transition:all .25s;cursor:pointer;text-decoration:none;display:block;
+}
+.yt-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.12);border-color:#ff000088;}
+.yt-thumb{
+  width:100%;aspect-ratio:16/9;background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;position:relative;overflow:hidden;
+}
+.yt-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.yt-play{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.35);opacity:0;transition:opacity .2s;
+}
+.yt-card:hover .yt-play{opacity:1;}
+.yt-play-btn{
+  width:52px;height:36px;background:#ff0000;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.yt-play-btn::after{content:'▶';color:#fff;font-size:14px;margin-left:2px;}
+.yt-info{padding:14px 16px;}
+.yt-channel{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
+.yt-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:8px;}
+.yt-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.yt-tag{font-size:10px;padding:2px 8px;border-radius:99px;font-weight:600;background:var(--bg3);border:1px solid var(--border);color:var(--muted);}
+.yt-lang{font-size:11px;color:var(--muted);}
 </style>
-</head>
 <body>
 
 <!-- ═══ SPLASH SCREEN ═══ -->
@@ -589,7 +622,7 @@ nav{
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;
       margin-bottom:6px;
       animation:fadeInUp 0.6s ease 0.2s both;
-    ">Cisco Academy</div>
+    ">Học Mạng Cùng Trung</div>
     <div style="
       font-size:13px;color:var(--muted);
       font-family:'DM Sans',sans-serif;
@@ -653,7 +686,7 @@ nav{
 
 <!-- ═══ NAV ═══ -->
 <nav>
-  <div class="nav-logo">🌐 <span>Cisco</span> Academy</div>
+  <div class="nav-logo">🌐 <span>Học Mạng</span> Cùng Trung</div>
   <div class="nav-links">
     <button class="nav-link active" onclick="showPage('home')">Trang chủ</button>
     <button class="nav-link ccna-link" onclick="showPage('ccna')">CCNA</button>
@@ -663,6 +696,7 @@ nav{
     <button class="nav-link" onclick="showPage('quiz')">Kiểm tra</button>
     <button class="nav-link" onclick="showPage('tools')">Công cụ</button>
     <button class="nav-link" onclick="showPage('cheatsheet')">Cheat Sheet</button>
+    <button class="nav-link" onclick="showPage('resources')">📺 Tài nguyên</button>
   </div>
   <div class="nav-right">
     <span class="nav-badge nb-ccna">CCNA</span>
@@ -849,6 +883,9 @@ nav{
           <div class="rm-duration">Tuần 11–13</div>
         </div>
       </div>
+
+    <div class="sec-title" style="margin-top:40px">📺 Kênh YouTube học CCNA</div>
+    <div class="yt-grid" id="yt-ccna-inline"></div>
     </div>
   </div>
 </div>
@@ -979,6 +1016,9 @@ nav{
           <div class="rm-duration">Tháng 4–5</div>
         </div>
       </div>
+
+    <div class="sec-title" style="margin-top:40px">📺 Kênh YouTube học CCNP</div>
+    <div class="yt-grid" id="yt-ccnp-inline"></div>
     </div>
   </div>
 </div>
@@ -1097,6 +1137,9 @@ nav{
           <div class="rm-duration">Tháng 12+</div>
         </div>
       </div>
+
+    <div class="sec-title" style="margin-top:40px">📺 Kênh YouTube học CCIE</div>
+    <div class="yt-grid" id="yt-ccie-inline"></div>
     </div>
   </div>
 </div>
@@ -1240,6 +1283,45 @@ nav{
     </div>
     <div class="cs-grid" id="cs-container"></div>
   </div>
+</div>
+
+<!-- ═══ RESOURCES PAGE ═══ -->
+<div class="page" id="page-resources">
+<div style="padding:48px">
+  <div style="margin-bottom:36px">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px">// tài nguyên học tập</div>
+    <h1 style="font-size:32px;font-weight:800;margin-bottom:8px">📺 Kênh YouTube & Tài nguyên</h1>
+    <p style="color:var(--muted);font-size:14px">Tổng hợp các kênh YouTube chất lượng cao, hoàn toàn miễn phí cho CCNA · CCNP · CCIE</p>
+  </div>
+
+  <!-- ADD YOUR OWN LINK BAR -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:36px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap">
+    <div class="ig" style="flex:1;min-width:200px">
+      <label>Tên video / kênh</label>
+      <input type="text" id="yt-name" placeholder="VD: OSPF Lab Tutorial" style="width:100%">
+    </div>
+    <div class="ig" style="flex:2;min-width:280px">
+      <label>Link YouTube</label>
+      <input type="text" id="yt-url" placeholder="https://youtube.com/watch?v=..." style="width:100%">
+    </div>
+    <div class="ig">
+      <label>Chủ đề</label>
+      <select id="yt-cat">
+        <option value="ccna">CCNA</option>
+        <option value="ccnp">CCNP</option>
+        <option value="ccie">CCIE</option>
+        <option value="tool">Công cụ / Lab</option>
+      </select>
+    </div>
+    <div class="ig" style="display:flex;flex-direction:column;justify-content:flex-end">
+      <label>&nbsp;</label>
+      <button class="btn btn-primary btn-ccna" onclick="addYoutubeLink()">+ Thêm link</button>
+    </div>
+  </div>
+
+  <!-- CURATED CHANNELS -->
+  <div id="resources-container"></div>
+</div>
 </div>
 
 <!-- ═══ LESSON MODAL ═══ -->
@@ -2104,6 +2186,10 @@ function showPage(id) {
   if(id==='quiz') renderQuiz();
   if(id==='cheatsheet') renderCheatsheet();
   if(id==='tools') calcSubnet();
+  if(id==='resources') renderResources();
+  if(id==='ccna')  setTimeout(()=>renderInlineYt('yt-ccna-inline', ytData.ccna), 50);
+  if(id==='ccnp')  setTimeout(()=>renderInlineYt('yt-ccnp-inline', ytData.ccnp), 50);
+  if(id==='ccie')  setTimeout(()=>renderInlineYt('yt-ccie-inline', ytData.ccie), 50);
 }
 
 // ══════════════════════════════
@@ -2119,7 +2205,53 @@ function openLesson(cert, lessonId) {
   document.getElementById('modal-icon').style.background = lesson.color.replace('var(','').replace(')','') + '15';
   document.getElementById('modal-title').textContent = lesson.title;
   document.getElementById('modal-sub').textContent = lesson.sub;
-  document.getElementById('modal-body').innerHTML = lesson.content;
+
+  // Related YouTube videos for this lesson
+  const relatedMap = {
+    osi:     [ytData.ccna[0], ytData.ccna[1]],
+    ip:      [ytData.ccna[3], ytData.ccna[0]],
+    vlan:    [ytData.ccna[4], ytData.ccna[1]],
+    ospf:    [ytData.ccna[5], ytData.ccna[0]],
+    acl:     [ytData.ccna[1], ytData.ccna[2]],
+    wireless:[ytData.ccna[0], ytData.ccna[1]],
+    eigrp:   [ytData.ccnp[2], ytData.ccnp[0]],
+    bgp:     [ytData.ccnp[1], ytData.ccnp[0]],
+    qos:     [ytData.ccnp[5], ytData.ccnp[0]],
+    sdwan:   [ytData.ccnp[3], ytData.ccnp[0]],
+    mpls:    [ytData.ccnp[4], ytData.ccnp[0]],
+    auto:    [ytData.ccie[4], ytData.ccnp[0]],
+    security:[ytData.ccnp[0], ytData.ccnp[5]],
+    ha:      [ytData.ccnp[0], ytData.ccnp[2]],
+    advanced_routing:[ytData.ccie[0], ytData.ccnp[1]],
+    mpls_adv:[ytData.ccie[1], ytData.ccnp[4]],
+    security_adv:[ytData.ccie[0], ytData.ccnp[5]],
+    dc:      [ytData.ccie[2], ytData.ccie[0]],
+    sr:      [ytData.ccie[1], ytData.ccie[0]],
+    automation_adv:[ytData.ccie[4], ytData.ccnp[3]],
+  };
+  const related = relatedMap[lessonId] || [];
+  let relatedHtml = '';
+  if (related.length > 0) {
+    relatedHtml = `
+      <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px">📺 Video liên quan</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">
+          ${related.filter(Boolean).map(v => `
+            <a href="${v.url}" target="_blank" rel="noopener" class="yt-card" style="text-decoration:none">
+              <div class="yt-thumb" style="font-size:28px">
+                ${v.thumb ? `<img src="${v.thumb}" alt="${v.title}" onerror="this.style.display='none'">` : '🎬'}
+                <div class="yt-play"><div class="yt-play-btn"></div></div>
+              </div>
+              <div class="yt-info">
+                <div class="yt-channel">▶ ${v.channel}</div>
+                <div class="yt-title">${v.title}</div>
+              </div>
+            </a>`).join('')}
+        </div>
+      </div>`;
+  }
+
+  document.getElementById('modal-body').innerHTML = lesson.content + relatedHtml;
   document.getElementById('modal-body').style.setProperty('--hero-color', lesson.color);
 
   const certMap = {ccna:'var(--ccna)',ccnp:'var(--ccnp)',ccie:'var(--ccie)'};
@@ -2263,6 +2395,144 @@ function calcSubnet() {
     }
   }, 30);
 })();
+
+// ══════════════════════════════
+// RESOURCES / YOUTUBE DATA
+// ══════════════════════════════
+const ytData = {
+  ccna: [
+    { title:'CCNA 200-301 — Full Course (31 hours)', channel:'Jeremy\'s IT Lab', url:'https://www.youtube.com/playlist?list=PLxbwE86jKRgMpuZuLBivzlM8s2Dk5lXBQ', thumb:'https://i.ytimg.com/vi/H8W9oMNSuwo/mqdefault.jpg', tags:['Full Course','Playlist'], lang:'🇺🇸 English' },
+    { title:'CCNA Full Course — FREE (200-301)', channel:'NetworkChuck', url:'https://www.youtube.com/playlist?list=PLIhvC56v63IIJZRa3lzK6IeBQOH_VFjUQ', thumb:'https://i.ytimg.com/vi/S7MNX_UD7vY/mqdefault.jpg', tags:['Beginner','Fun'], lang:'🇺🇸 English' },
+    { title:'CCNA 200-301 — Complete Course', channel:'David Bombal', url:'https://www.youtube.com/playlist?list=PLhfrWIlLOoKMe1Ue0IdeULQvEgCgQ3a1B', thumb:'https://i.ytimg.com/vi/rv3QK2UquxM/mqdefault.jpg', tags:['Labs','Packet Tracer'], lang:'🇺🇸 English' },
+    { title:'Subnetting Mastery — Học subnet nhanh', channel:'Professor Messer', url:'https://www.youtube.com/watch?v=BWZ-MHIoqIM', thumb:'https://i.ytimg.com/vi/BWZ-MHIoqIM/mqdefault.jpg', tags:['Subnetting'], lang:'🇺🇸 English' },
+    { title:'Cisco Packet Tracer — Hướng dẫn từ A-Z', channel:'NetworkChuck', url:'https://www.youtube.com/watch?v=nzSFDYvh9v8', thumb:'https://i.ytimg.com/vi/nzSFDYvh9v8/mqdefault.jpg', tags:['Packet Tracer','Lab'], lang:'🇺🇸 English' },
+    { title:'OSPF Explained — Full Tutorial', channel:'David Bombal', url:'https://www.youtube.com/watch?v=kfvJ8QVJscc', thumb:'https://i.ytimg.com/vi/kfvJ8QVJscc/mqdefault.jpg', tags:['OSPF','Routing'], lang:'🇺🇸 English' },
+    { title:'Học CCNA tiếng Việt — Cơ bản mạng máy tính', channel:'Tự học IT', url:'https://www.youtube.com/results?search_query=hoc+ccna+tieng+viet', thumb:'', tags:['Tiếng Việt'], lang:'🇻🇳 Tiếng Việt' },
+  ],
+  ccnp: [
+    { title:'CCNP ENCOR 350-401 — Full Course', channel:'INE Training', url:'https://www.youtube.com/playlist?list=PLaJCKi8Nk1hwaMUYxJMiM3jTB2o58A6WN', thumb:'https://i.ytimg.com/vi/5Pk5tqJCDsM/mqdefault.jpg', tags:['Full Course','ENCOR'], lang:'🇺🇸 English' },
+    { title:'BGP Complete Tutorial — CCNP Level', channel:'David Bombal', url:'https://www.youtube.com/watch?v=_Z29ZzKeZHc', thumb:'https://i.ytimg.com/vi/_Z29ZzKeZHc/mqdefault.jpg', tags:['BGP','WAN'], lang:'🇺🇸 English' },
+    { title:'EIGRP Deep Dive — Named Mode', channel:'Keith Barker (CBT Nuggets)', url:'https://www.youtube.com/watch?v=dLNFHq0FfZw', thumb:'https://i.ytimg.com/vi/dLNFHq0FfZw/mqdefault.jpg', tags:['EIGRP'], lang:'🇺🇸 English' },
+    { title:'SD-WAN Cisco Viptela — Full Overview', channel:'NetworkChuck', url:'https://www.youtube.com/watch?v=eFCP0PKPPWY', thumb:'https://i.ytimg.com/vi/eFCP0PKPPWY/mqdefault.jpg', tags:['SD-WAN','Modern'], lang:'🇺🇸 English' },
+    { title:'MPLS Explained — Clear and Simple', channel:'Practical Networking', url:'https://www.youtube.com/watch?v=67dLmkggUOA', thumb:'https://i.ytimg.com/vi/67dLmkggUOA/mqdefault.jpg', tags:['MPLS','VPN'], lang:'🇺🇸 English' },
+    { title:'QoS Full Course — CCNP Level', channel:'CBT Nuggets', url:'https://www.youtube.com/watch?v=vCJ8kDYI8ZE', thumb:'https://i.ytimg.com/vi/vCJ8kDYI8ZE/mqdefault.jpg', tags:['QoS','Traffic'], lang:'🇺🇸 English' },
+  ],
+  ccie: [
+    { title:'CCIE Enterprise — Study Plan & Tips', channel:'Nick Russo', url:'https://www.youtube.com/watch?v=F_cO5ReWksE', thumb:'https://i.ytimg.com/vi/F_cO5ReWksE/mqdefault.jpg', tags:['Study Plan'], lang:'🇺🇸 English' },
+    { title:'Segment Routing Deep Dive', channel:'NANOG / Cisco Live', url:'https://www.youtube.com/watch?v=TB9-Q6GmT8E', thumb:'https://i.ytimg.com/vi/TB9-Q6GmT8E/mqdefault.jpg', tags:['Segment Routing','SR-MPLS'], lang:'🇺🇸 English' },
+    { title:'Cisco ACI Deep Dive — Fabric & Policy', channel:'David Bombal', url:'https://www.youtube.com/watch?v=XlU7gkzNVvQ', thumb:'https://i.ytimg.com/vi/XlU7gkzNVvQ/mqdefault.jpg', tags:['ACI','Data Center'], lang:'🇺🇸 English' },
+    { title:'CCIE Lab — 8 Hour Mock Walkthrough', channel:'INE Training', url:'https://www.youtube.com/watch?v=Bfz5l3mkHYE', thumb:'https://i.ytimg.com/vi/Bfz5l3mkHYE/mqdefault.jpg', tags:['Lab Exam','Mock'], lang:'🇺🇸 English' },
+    { title:'Network Automation with Python — Full', channel:'NetworkChuck', url:'https://www.youtube.com/playlist?list=PLIhvC56v63IIQqNO8WTMdTBpg2rjkdZ2q', thumb:'https://i.ytimg.com/vi/hGN25oRBNzA/mqdefault.jpg', tags:['Python','Automation'], lang:'🇺🇸 English' },
+  ],
+  tool: [
+    { title:'GNS3 Full Install + Setup 2024', channel:'David Bombal', url:'https://www.youtube.com/watch?v=Ibe3hgP8gCA', thumb:'https://i.ytimg.com/vi/Ibe3hgP8gCA/mqdefault.jpg', tags:['GNS3','Lab Setup'], lang:'🇺🇸 English' },
+    { title:'Cisco Packet Tracer Install + First Lab', channel:'NetworkChuck', url:'https://www.youtube.com/watch?v=nzSFDYvh9v8', thumb:'https://i.ytimg.com/vi/nzSFDYvh9v8/mqdefault.jpg', tags:['Packet Tracer'], lang:'🇺🇸 English' },
+    { title:'EVE-NG Setup — Best Network Emulator', channel:'David Bombal', url:'https://www.youtube.com/watch?v=k4s8F3Sxwv0', thumb:'https://i.ytimg.com/vi/k4s8F3Sxwv0/mqdefault.jpg', tags:['EVE-NG','Emulator'], lang:'🇺🇸 English' },
+    { title:'Subnetting Practice — Master in 15 min', channel:'Practical Networking', url:'https://www.youtube.com/watch?v=BWZ-MHIoqIM', thumb:'https://i.ytimg.com/vi/BWZ-MHIoqIM/mqdefault.jpg', tags:['Subnetting','Practice'], lang:'🇺🇸 English' },
+  ],
+};
+
+// User-added links (stored in localStorage)
+let userLinks = JSON.parse(localStorage.getItem('yt-user-links') || '[]');
+
+function getYtId(url) {
+  const m = url.match(/(?:v=|youtu\.be\/|embed\/)([^&?/]+)/);
+  return m ? m[1] : null;
+}
+
+function renderYtCard(item, isUser = false) {
+  const ytId = getYtId(item.url);
+  const thumbUrl = item.thumb || (ytId ? `https://i.ytimg.com/vi/${ytId}/mqdefault.jpg` : '');
+  const tagHtml = (item.tags || []).map(t =>
+    `<span class="yt-tag ${isUser ? 'yt-custom-tag' : ''}">${t}</span>`
+  ).join('');
+  return `
+    <a class="yt-card" href="${item.url}" target="_blank" rel="noopener">
+      <div class="yt-thumb">
+        ${thumbUrl ? `<img src="${thumbUrl}" alt="${item.title}" onerror="this.style.display='none'">` : '🎬'}
+        <div class="yt-play"><div class="yt-play-btn"></div></div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-channel">▶ ${item.channel || 'YouTube'} ${isUser ? '· <span style="color:var(--ccna)">Của bạn</span>' : ''}</div>
+        <div class="yt-title">${item.title}</div>
+        <div class="yt-meta">${tagHtml}<span class="yt-lang">${item.lang || ''}</span></div>
+      </div>
+    </a>`;
+}
+
+function renderInlineYt(containerId, items) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = items.map(item => renderYtCard(item)).join('');
+}
+
+function renderResources() {
+  const container = document.getElementById('resources-container');
+  if (!container) return;
+
+  const sections = [
+    { key:'ccna',  label:'🎓 CCNA — Kênh học Associate', color:'var(--ccna)' },
+    { key:'ccnp',  label:'⚡ CCNP — Kênh học Professional', color:'var(--ccnp)' },
+    { key:'ccie',  label:'👑 CCIE — Kênh học Expert', color:'var(--ccie)' },
+    { key:'tool',  label:'🛠️ Công cụ & Lab Setup', color:'var(--green)' },
+  ];
+
+  let html = '';
+
+  // User-added links first
+  if (userLinks.length > 0) {
+    html += `<div class="yt-section">
+      <div class="yt-section-title" style="color:var(--ccna)">⭐ Link bạn đã thêm</div>
+      <div class="yt-grid">${userLinks.map((item, i) => `
+        <div style="position:relative">
+          ${renderYtCard(item, true)}
+          <button onclick="deleteUserLink(${i})" style="
+            position:absolute;top:8px;right:8px;
+            background:#ff000099;color:#fff;border:none;
+            border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;
+          ">✕ Xoá</button>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  sections.forEach(sec => {
+    const items = ytData[sec.key] || [];
+    html += `<div class="yt-section">
+      <div class="yt-section-title" style="color:${sec.color}">${sec.label}</div>
+      <div class="yt-grid">${items.map(item => renderYtCard(item)).join('')}</div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function addYoutubeLink() {
+  const name = document.getElementById('yt-name').value.trim();
+  const url  = document.getElementById('yt-url').value.trim();
+  const cat  = document.getElementById('yt-cat').value;
+  if (!name || !url) { alert('Vui lòng nhập tên và link YouTube!'); return; }
+  if (!url.includes('youtube.com') && !url.includes('youtu.be')) {
+    alert('Link không hợp lệ — vui lòng dùng link YouTube!'); return;
+  }
+  const catLabel = { ccna:'CCNA', ccnp:'CCNP', ccie:'CCIE', tool:'Công cụ' };
+  const ytId = getYtId(url);
+  userLinks.unshift({
+    title: name, channel: 'Của bạn', url,
+    thumb: ytId ? `https://i.ytimg.com/vi/${ytId}/mqdefault.jpg` : '',
+    tags: [catLabel[cat]], lang: '🇻🇳',
+  });
+  localStorage.setItem('yt-user-links', JSON.stringify(userLinks));
+  document.getElementById('yt-name').value = '';
+  document.getElementById('yt-url').value = '';
+  renderResources();
+}
+
+function deleteUserLink(idx) {
+  userLinks.splice(idx, 1);
+  localStorage.setItem('yt-user-links', JSON.stringify(userLinks));
+  renderResources();
+}
 
 // ══════════════════════════════
 // THEME TOGGLE
