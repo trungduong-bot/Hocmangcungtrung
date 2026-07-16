@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khảo Sát Đồng Bộ Google Sheets</title>
+    <title>Khảo Sát Chọn Màu Sắc trực tuyến</title>
     <style>
         :root {
             --primary-color: #4a90e2;
@@ -15,7 +15,7 @@
             margin: 0;
             padding: 20px;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
@@ -33,17 +33,18 @@
             text-align: center;
             color: #333;
             margin-bottom: 25px;
+            font-size: 24px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         label {
             display: block;
             font-weight: 600;
-            margin-bottom: 8px;
-            color: #555;
+            margin-bottom: 10px;
+            color: #444;
         }
 
         input[type="text"] {
@@ -59,13 +60,14 @@
 
         input[type="text"]:focus {
             border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
         }
 
         /* Bảng màu có sẵn */
         .color-palette {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 15px;
         }
 
@@ -82,8 +84,9 @@
         }
 
         .color-box.selected {
-            border-color: #000;
+            border-color: #222;
             transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
         /* Chọn màu tự do */
@@ -92,7 +95,7 @@
             align-items: center;
             gap: 15px;
             background: #f9f9f9;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             border: 1px dashed #ccc;
         }
@@ -107,10 +110,17 @@
             background: none;
         }
 
+        #colorHexText {
+            font-size: 14px;
+            color: #555;
+            font-family: monospace;
+            font-weight: bold;
+        }
+
         /* Nút gửi */
         button {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background-color: var(--primary-color);
             color: white;
             border: none;
@@ -126,7 +136,7 @@
         }
 
         button:disabled {
-            background-color: #ccc;
+            background-color: #cccccc;
             cursor: not-allowed;
         }
     </style>
@@ -138,11 +148,11 @@
     
     <div class="form-group">
         <label for="fullName">Họ và tên của bạn:</label>
-        <input type="text" id="fullName" placeholder="Nhập đầy đủ họ và tên..." required>
+        <input type="text" id="fullName" placeholder="Nhập đầy đủ họ và tên..." required autocomplete="off">
     </div>
 
     <div class="form-group">
-        <label>Chọn một màu bạn yêu thích:</label>
+        <label>Chọn một tông màu yêu thích:</label>
         <div class="color-palette" id="palette">
             <div class="color-box" style="background-color: #ff4d4d;" data-color="#ff4d4d"></div>
             <div class="color-box" style="background-color: #ff9f43;" data-color="#ff9f43"></div>
@@ -158,10 +168,10 @@
     </div>
 
     <div class="form-group">
-        <label>Hoặc tự chỉnh màu tùy ý:</label>
+        <label>Hoặc tự phối màu tùy chỉnh:</label>
         <div class="picker-group">
             <input type="color" id="customColor" value="#4a90e2">
-            <span id="colorHexText">Mã màu đang chọn: #4A90E2</span>
+            <span id="colorHexText">MÃ MÀU: #4A90E2</span>
         </div>
     </div>
 
@@ -169,8 +179,10 @@
 </div>
 
 <script>
-    // === ĐƯỜNG DẪN API GOOGLE SHEET CỦA BẠN ===
-    const GOOGLE_SHEET_API_URL = "DÁN_URL_CỦA_BẠN_VÀO_ĐÂY"; 
+    // =========================================================
+    // ⚠️ CHÚ Ý: DÁN LINK WEB APP CỦA BẠN VÀO GIỮA HAI DẤU NHÁY DƯỚI ĐÂY
+    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzpD6gj8USYae85Riw1_H5AdEBq4AqXsRFr-jyGYBPpjTSRLHVx1jL8Q6xgSMBttjRG/exec"; 
+    // =========================================================
 
     let selectedColor = "#4a90e2"; 
     const colorBoxes = document.querySelectorAll('.color-box');
@@ -179,7 +191,7 @@
     const fullNameInput = document.getElementById('fullName');
     const btnSubmit = document.getElementById('btnSubmit');
 
-    // Sự kiện click bảng màu gợi ý
+    // Click chọn các ô màu có sẵn
     colorBoxes.forEach(box => {
         box.addEventListener('click', function() {
             colorBoxes.forEach(b => b.classList.remove('selected'));
@@ -187,18 +199,18 @@
             selectedColor = this.getAttribute('data-color');
             
             customColorInput.value = selectedColor;
-            colorHexText.innerText = `Mã màu đang chọn: ${selectedColor.toUpperCase()}`;
+            colorHexText.innerText = `MÃ MÀU: ${selectedColor.toUpperCase()}`;
         });
     });
 
-    // Sự kiện thay đổi bộ chọn màu tự do
+    // Thay đổi màu ở Color Picker
     customColorInput.addEventListener('input', function() {
         colorBoxes.forEach(b => b.classList.remove('selected'));
         selectedColor = this.value;
-        colorHexText.innerText = `Mã màu đang chọn: ${selectedColor.toUpperCase()}`;
+        colorHexText.innerText = `MÃ MÀU: ${selectedColor.toUpperCase()}`;
     });
 
-    // Gửi dữ liệu trực tiếp sang Google Sheets
+    // Hàm gửi dữ liệu lên Google Sheets
     function submitSurvey() {
         const name = fullNameInput.value.trim();
         
@@ -208,40 +220,39 @@
             return;
         }
 
-        if (GOOGLE_SHEET_API_URL === "https://script.google.com/macros/s/AKfycbyMQpBrHZPqCPpP5y5Tw82irkHvZuQc0c1QlOIh7ivfebHoBAvte9dEQH9brGklywS1/exec") {
-            alert("Vui lòng cấu hình GOOGLE_SHEET_API_URL trong mã nguồn trước khi gửi.");
+        if (GOOGLE_SHEET_API_URL.includes("DÁN_URL_CỦA_BẠN_VÀO_ĐÂY")) {
+            alert("Lỗi: Bạn chưa cấu hình GOOGLE_SHEET_API_URL ở dòng 175.");
             return;
         }
 
-        // Vô hiệu hóa nút bấm để tránh click liên tục
-        btnSubmit.disabled = true;z
-        btnSubmit.innerText = "Đang gửi dữ liệu...";
+        // Vô hiệu hóa nút để tránh gửi trùng lặp
+        btnSubmit.disabled = true;
+        btnSubmit.innerText = "Đang gửi dữ liệu lên Google Sheet...";
 
-        const payload = {
-            fullName: name,
-            colorCode: selectedColor.toUpperCase()
-        };
+        // Chuyển dữ liệu sang URL Encoded (Đảm bảo hoạt động 100% offline file:///)
+        const formData = new URLSearchParams();
+        formData.append('fullName', name);
+        formData.append('colorCode', selectedColor.toUpperCase());
 
-        // Dùng Fetch API để bắn dữ liệu qua phương thức POST ẩn sang Google Apps Script
         fetch(GOOGLE_SHEET_API_URL, {
             method: 'POST',
-            mode: 'no-cors', // Sử dụng chế độ no-cors để tránh lỗi bảo mật chéo trang (CORS)
+            mode: 'no-cors', // Sử dụng chế độ này giúp bỏ qua mọi giới hạn CORS từ trình duyệt
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: JSON.stringify(payload)
+            body: formData.toString()
         })
         .then(() => {
-            alert("Cảm ơn bạn! Thông tin đã được lưu trực tiếp vào Google Sheets.");
-            fullNameInput.value = "";
+            alert("Gửi thành công! Dữ liệu đã được ghi nhận vào Google Sheet của bạn.");
             
-            // Khôi phục nút bấm
+            // Reset form
+            fullNameInput.value = "";
             btnSubmit.disabled = false;
             btnSubmit.innerText = "Gửi Khảo Sát";
         })
         .catch(error => {
-            console.error("Lỗi:", error);
-            alert("Đã xảy ra lỗi khi đồng bộ dữ liệu.");
+            console.error("Lỗi gửi dữ liệu:", error);
+            alert("Gửi thất bại! Hãy kiểm tra kết nối mạng hoặc link Google App Script.");
             btnSubmit.disabled = false;
             btnSubmit.innerText = "Gửi Khảo Sát";
         });
