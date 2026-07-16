@@ -11,7 +11,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
+            background-color: #f0f3f5;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -23,70 +23,84 @@
         .survey-container {
             background-color: #ffffff;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            max-width: 500px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-width: 600px;
             width: 100%;
         }
 
         h2 {
             text-align: center;
-            color: #333;
+            color: #222;
             margin-bottom: 25px;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: #444;
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 15px;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
+            padding: 14px;
+            border: 1px solid #dcdfe6;
             border-radius: 8px;
             box-sizing: border-box;
             font-size: 15px;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         input[type="text"]:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.2);
         }
 
-        /* Bảng màu có sẵn */
+        /* Danh mục nhóm màu */
+        .color-group-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7f8c8d;
+            margin: 15px 0 8px 0;
+            font-weight: bold;
+        }
+
+        /* Bảng lưới màu cực nhiều */
         .color-palette {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(8, 1fr); /* 8 màu một hàng */
+            gap: 8px;
             margin-bottom: 15px;
         }
 
         .color-box {
-            height: 45px;
-            border-radius: 8px;
+            aspect-ratio: 1; /* Tạo ô vuông hoàn hảo */
+            border-radius: 6px;
             cursor: pointer;
-            border: 3px solid transparent;
-            transition: transform 0.2s, border-color 0.2s;
+            border: 2px solid transparent;
+            transition: transform 0.15s, border-color 0.15s;
         }
 
         .color-box:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
+            z-index: 2;
         }
 
         .color-box.selected {
-            border-color: #222;
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #111;
+            transform: scale(1.1);
+            box-shadow: 0 0 6px rgba(0,0,0,0.3);
+            z-index: 1;
         }
 
         /* Chọn màu tự do */
@@ -94,10 +108,10 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: #f9f9f9;
+            background: #f8f9fa;
             padding: 12px;
             border-radius: 8px;
-            border: 1px dashed #ccc;
+            border: 1px dashed #ced4da;
         }
 
         input[type="color"] {
@@ -112,7 +126,7 @@
 
         #colorHexText {
             font-size: 14px;
-            color: #555;
+            color: #495057;
             font-family: monospace;
             font-weight: bold;
         }
@@ -129,6 +143,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -152,23 +167,71 @@
     </div>
 
     <div class="form-group">
-        <label>Chọn một tông màu yêu thích:</label>
-        <div class="color-palette" id="palette">
+        <label>Chọn một màu sắc bạn yêu thích:</label>
+        
+        <div class="color-group-title">Tone Pastel ngọt ngào</div>
+        <div class="color-palette">
+            <div class="color-box" style="background-color: #ffb8b8;" data-color="#ffb8b8"></div>
+            <div class="color-box" style="background-color: #ffdd94;" data-color="#ffdd94"></div>
+            <div class="color-box" style="background-color: #g0ffb2; background-color: #ccffd8;" data-color="#ccffd8"></div>
+            <div class="color-box" style="background-color: #baffc9;" data-color="#baffc9"></div>
+            <div class="color-box" style="background-color: #bae1ff;" data-color="#bae1ff"></div>
+            <div class="color-box" style="background-color: #c5a3ff;" data-color="#c5a3ff"></div>
+            <div class="color-box" style="background-color: #fbc5ff;" data-color="#fbc5ff"></div>
+            <div class="color-box" style="background-color: #f0f2f5;" data-color="#f0f2f5"></div>
+        </div>
+
+        <div class="color-group-title">Tone Ấm rực rỡ</div>
+        <div class="color-palette">
             <div class="color-box" style="background-color: #ff4d4d;" data-color="#ff4d4d"></div>
+            <div class="color-box" style="background-color: #ff6b6b;" data-color="#ff6b6b"></div>
             <div class="color-box" style="background-color: #ff9f43;" data-color="#ff9f43"></div>
             <div class="color-box" style="background-color: #feca57;" data-color="#feca57"></div>
-            <div class="color-box" style="background-color: #1dd1a1;" data-color="#1dd1a1"></div>
-            <div class="color-box" style="background-color: #54a0ff;" data-color="#54a0ff"></div>
-            <div class="color-box" style="background-color: #5f27cd;" data-color="#5f27cd"></div>
+            <div class="color-box" style="background-color: #ff7597;" data-color="#ff7597"></div>
+            <div class="color-box" style="background-color: #ee5253;" data-color="#ee5253"></div>
             <div class="color-box" style="background-color: #ff9ff3;" data-color="#ff9ff3"></div>
+            <div class="color-box" style="background-color: #f368e0;" data-color="#f368e0"></div>
+        </div>
+
+        <div class="color-group-title">Tone Lạnh thanh lịch</div>
+        <div class="color-palette">
+            <div class="color-box" style="background-color: #1dd1a1;" data-color="#1dd1a1"></div>
+            <div class="color-box" style="background-color: #10ac84;" data-color="#10ac84"></div>
             <div class="color-box" style="background-color: #00d2d3;" data-color="#00d2d3"></div>
-            <div class="color-box" style="background-color: #48dbfb;" data-color="#48dbfb"></div>
+            <div class="color-box" style="background-color: #01a3a4;" data-color="#01a3a4"></div>
+            <div class="color-box" style="background-color: #54a0ff;" data-color="#54a0ff"></div>
+            <div class="color-box" style="background-color: #2e86de;" data-color="#2e86de"></div>
+            <div class="color-box" style="background-color: #5f27cd;" data-color="#5f27cd"></div>
             <div class="color-box" style="background-color: #341f97;" data-color="#341f97"></div>
+        </div>
+
+        <div class="color-group-title">Tone Trầm & Sang trọng</div>
+        <div class="color-palette">
+            <div class="color-box" style="background-color: #2c3e50;" data-color="#2c3e50"></div>
+            <div class="color-box" style="background-color: #34495e;" data-color="#34495e"></div>
+            <div class="color-box" style="background-color: #7f8c8d;" data-color="#7f8c8d"></div>
+            <div class="color-box" style="background-color: #95a5a6;" data-color="#95a5a6"></div>
+            <div class="color-box" style="background-color: #833471;" data-color="#833471"></div>
+            <div class="color-box" style="background-color: #6F1E51;" data-color="#6F1E51"></div>
+            <div class="color-box" style="background-color: #1e272e;" data-color="#1e272e"></div>
+            <div class="color-box" style="background-color: #000000;" data-color="#000000"></div>
+        </div>
+
+        <div class="color-group-title">Màu Đất & Tự nhiên</div>
+        <div class="color-palette">
+            <div class="color-box" style="background-color: #8b5a2b;" data-color="#8b5a2b"></div>
+            <div class="color-box" style="background-color: #cd853f;" data-color="#cd853f"></div>
+            <div class="color-box" style="background-color: #d2b48c;" data-color="#d2b48c"></div>
+            <div class="color-box" style="background-color: #556b2f;" data-color="#556b2f"></div>
+            <div class="color-box" style="background-color: #8fbc8f;" data-color="#8fbc8f"></div>
+            <div class="color-box" style="background-color: #2e8b57;" data-color="#2e8b57"></div>
+            <div class="color-box" style="background-color: #4682b4;" data-color="#4682b4"></div>
+            <div class="color-box" style="background-color: #708090;" data-color="#708090"></div>
         </div>
     </div>
 
     <div class="form-group">
-        <label>Hoặc tự phối màu tùy chỉnh:</label>
+        <label>Hoặc tự phối màu thủ công bằng con chạy:</label>
         <div class="picker-group">
             <input type="color" id="customColor" value="#4a90e2">
             <span id="colorHexText">MÃ MÀU: #4A90E2</span>
@@ -181,7 +244,7 @@
 <script>
     // =========================================================
     // ⚠️ CHÚ Ý: DÁN LINK WEB APP CỦA BẠN VÀO GIỮA HAI DẤU NHÁY DƯỚI ĐÂY
-    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzpD6gj8USYae85Riw1_H5AdEBq4AqXsRFr-jyGYBPpjTSRLHVx1jL8Q6xgSMBttjRG/exec"; 
+    const GOOGLE_SHEET_API_URL = "DÁN_URL_WEB_APP_CỦA_BẠN_VÀO_ĐÂY"; 
     // =========================================================
 
     let selectedColor = "#4a90e2"; 
@@ -220,8 +283,8 @@
             return;
         }
 
-        if (GOOGLE_SHEET_API_URL.includes("DÁN_URL_CỦA_BẠN_VÀO_ĐÂY")) {
-            alert("Lỗi: Bạn chưa cấu hình GOOGLE_SHEET_API_URL ở dòng 175.");
+        if (GOOGLE_SHEET_API_URL.includes("https://script.google.com/macros/s/AKfycbzpD6gj8USYae85Riw1_H5AdEBq4AqXsRFr-jyGYBPpjTSRLHVx1jL8Q6xgSMBttjRG/exec")) {
+            alert("Lỗi: Bạn chưa cấu hình GOOGLE_SHEET_API_URL trong mã nguồn (dòng 185).");
             return;
         }
 
@@ -229,21 +292,21 @@
         btnSubmit.disabled = true;
         btnSubmit.innerText = "Đang gửi dữ liệu lên Google Sheet...";
 
-        // Chuyển dữ liệu sang URL Encoded (Đảm bảo hoạt động 100% offline file:///)
+        // Chuyển dữ liệu sang URL Encoded
         const formData = new URLSearchParams();
         formData.append('fullName', name);
         formData.append('colorCode', selectedColor.toUpperCase());
 
         fetch(GOOGLE_SHEET_API_URL, {
             method: 'POST',
-            mode: 'no-cors', // Sử dụng chế độ này giúp bỏ qua mọi giới hạn CORS từ trình duyệt
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: formData.toString()
         })
         .then(() => {
-            alert("Gửi thành công! Dữ liệu đã được ghi nhận vào Google Sheet của bạn.");
+            alert("Gửi thành công! Màu sắc đã được lưu trực tiếp vào Cột D trên Google Sheet.");
             
             // Reset form
             fullNameInput.value = "";
